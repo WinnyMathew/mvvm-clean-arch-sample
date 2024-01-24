@@ -32,6 +32,10 @@ import androidx.navigation.NavController
 import com.example.presentation.ui.HeadingTextComponent
 import com.example.presentation.R
 import com.example.presentation.ui.mealsList.components.SingleMealItem
+import com.example.presentation.ui.theme.AppDimens
+import com.example.presentation.ui.theme.AppDimens.UI_SIZE_10
+import com.example.presentation.ui.theme.AppDimens.UI_SIZE_30
+import com.example.presentation.ui.theme.AppDimens.UI_SIZE_5
 
 @Composable
 fun MealsScreen(
@@ -46,7 +50,7 @@ fun MealsScreen(
             Row(
                 Modifier
                     .fillMaxWidth()
-                    .padding(10.dp),
+                    .padding(UI_SIZE_10.dp),
                 verticalAlignment = CenterVertically
             ) {
                 Icon(
@@ -54,9 +58,9 @@ fun MealsScreen(
                     contentDescription = stringResource(R.string.back_icon_cd),
                     tint = MaterialTheme.colorScheme.onBackground,
                     modifier = Modifier
-                        .padding(start = 5.dp, end = 10.dp, top = 10.dp)
+                        .padding(start = UI_SIZE_5.dp, end = UI_SIZE_10.dp, top = UI_SIZE_10.dp)
                         .clip(CircleShape)
-                        .size(30.dp)
+                        .size(UI_SIZE_30.dp)
                         .clickable(
                             onClick = {
                                 navController.popBackStack()
@@ -73,7 +77,7 @@ fun MealsScreen(
             }
             LazyColumn(
                 modifier = Modifier.fillMaxWidth(),
-                contentPadding = PaddingValues(10.dp)
+                contentPadding = PaddingValues(UI_SIZE_10.dp)
             ) {
                 items(state.meals) { dishes ->
                     SingleMealItem(

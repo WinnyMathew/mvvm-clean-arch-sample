@@ -37,6 +37,10 @@ import com.example.presentation.ui.TextTitleMealInfo
 import com.example.presentation.ui.mealDetail.components.MealDetailItem
 import com.example.presentation.ui.mealDetail.components.MealInstructions
 import com.example.presentation.R
+import com.example.presentation.ui.theme.AppDimens.UI_SIZE_10
+import com.example.presentation.ui.theme.AppDimens.UI_SIZE_15
+import com.example.presentation.ui.theme.AppDimens.UI_SIZE_30
+import com.example.presentation.ui.theme.AppDimens.UI_SIZE_5
 
 @Composable
 fun MealDetailScreen(
@@ -54,7 +58,7 @@ fun MealDetailScreen(
             Row(
                 Modifier
                     .fillMaxWidth()
-                    .padding(10.dp),
+                    .padding(UI_SIZE_10.dp),
                 verticalAlignment = CenterVertically
             ) {
                 Icon(
@@ -62,9 +66,9 @@ fun MealDetailScreen(
                     contentDescription = stringResource(R.string.back_icon_cd),
                     tint = MaterialTheme.colorScheme.onBackground,
                     modifier = Modifier
-                        .padding(start = 5.dp, end = 10.dp, top = 10.dp)
+                        .padding(start = UI_SIZE_5.dp, end = UI_SIZE_10.dp, top = UI_SIZE_10.dp)
                         .clip(CircleShape)
-                        .size(30.dp)
+                        .size(UI_SIZE_30.dp)
                         .clickable(
                             onClick = {
                                 navController.popBackStack()
@@ -82,18 +86,18 @@ fun MealDetailScreen(
             Card(
                 Modifier
                     .fillMaxWidth()
-                    .padding(10.dp),
+                    .padding(UI_SIZE_10.dp),
                 colors = CardDefaults.cardColors(
                     containerColor = MaterialTheme.colorScheme.surface
                 ),
                 elevation = CardDefaults.cardElevation(
-                    defaultElevation = 10.dp
+                    defaultElevation = UI_SIZE_10.dp
                 )
             ) {
                 state.meals.firstOrNull()?.let { meal ->
                     MealDetailItem(mealInfo = meal)
                 }
-                Spacer(modifier = Modifier.height(10.dp))
+                Spacer(modifier = Modifier.height(UI_SIZE_10.dp))
 
                 TextTitleMealInfo(stringResource(R.string.instructions_header))
                 state.meals.firstOrNull()?.let { meal ->
@@ -108,7 +112,7 @@ fun MealDetailScreen(
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 15.dp)
+                    .padding(horizontal = UI_SIZE_15.dp)
                     .align(Alignment.Center)
             )
         }

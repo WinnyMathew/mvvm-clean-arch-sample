@@ -25,6 +25,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.presentation.ui.HeadingTextComponent
 import com.example.presentation.R
 import com.example.presentation.ui.categoryList.components.SingleCategoryItem
+import com.example.presentation.ui.theme.AppDimens.UI_SIZE_10
+import com.example.presentation.ui.theme.AppDimens.UI_SIZE_15
 
 @Composable
 fun CategoriesScreen(
@@ -38,7 +40,7 @@ fun CategoriesScreen(
             Row(
                 Modifier
                     .fillMaxWidth()
-                    .padding(10.dp),
+                    .padding(UI_SIZE_10.dp),
                 verticalAlignment = CenterVertically,
             ) {
                 HeadingTextComponent(
@@ -46,13 +48,13 @@ fun CategoriesScreen(
                     textAlign = TextAlign.Start,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(start = 10.dp)
+                        .padding(start = UI_SIZE_10.dp)
                         .weight(1f)
                 )
 
             }
             LazyColumn(
-                contentPadding = PaddingValues(10.dp),
+                contentPadding = PaddingValues(UI_SIZE_10.dp),
                 modifier = Modifier.fillMaxWidth()
             ){
                 items(state.categories) { category ->
@@ -70,7 +72,7 @@ fun CategoriesScreen(
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 15.dp)
+                    .padding(horizontal = UI_SIZE_15.dp)
                     .align(Alignment.Center)
             )
         }
