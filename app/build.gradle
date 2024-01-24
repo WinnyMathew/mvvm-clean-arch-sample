@@ -4,17 +4,18 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
 }
+apply from: "$rootDir/gradleScript/dependencies.gradle"
 
 android {
     namespace 'com.example.mvvmcleanarchapp'
-    compileSdk 34
+    compileSdk compile_sdk_version
 
     defaultConfig {
         applicationId "com.example.mvvmcleanarchapp"
-        minSdk 24
-        targetSdk 34
-        versionCode 1
-        versionName "1.0"
+        minSdk min_sdk_version
+        targetSdk target_sdk_version
+        versionCode version_code
+        versionName version_name
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -39,7 +40,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion '1.5.1'
+        kotlinCompilerExtensionVersion kotlin_compiler_extension_version
     }
 
 
@@ -53,9 +54,9 @@ dependencies {
     implementation project(path: ':data')
     implementation project(path: ':domain')
 
-    implementation 'androidx.core:core-ktx:1.12.0'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.2'
-    implementation 'androidx.activity:activity-compose:1.8.2'
+    implementation kotlin_core
+    implementation kotlin_lifecycle_runtime
+    implementation composeDependencies.activity_compose
     implementation platform('androidx.compose:compose-bom:2023.08.00')
     implementation 'androidx.compose.ui:ui'
     implementation 'androidx.compose.ui:ui-graphics'
@@ -63,33 +64,32 @@ dependencies {
     implementation 'androidx.compose.material3:material3'
 
     // Compose dependencies
-    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1"
-    implementation "androidx.navigation:navigation-compose:2.5.0-alpha01"
-    implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
-    kapt "androidx.hilt:hilt-compiler:1.0.0"
+    implementation composeDependencies.viewmodel_compose
+    implementation composeDependencies.navigation_compose
+    implementation composeDependencies.hilt_navigation_compose
+
+    // Coil
+    implementation composeDependencies.coil
 
 
     //Dagger - Hilt
-    implementation "com.google.dagger:hilt-android:2.48"
-    kapt "com.google.dagger:hilt-android-compiler:2.48"
-    kapt "androidx.hilt:hilt-compiler:1.1.0"
+    implementation hiltDepedencies.dagger_hilt
+    kapt hiltDepedencies.hilt_android_compiler
+    kapt hiltDepedencies.hilt_compiler
 
-    // Coil
-    implementation "io.coil-kt:coil-compose:2.4.0"
+    // Coroutines
+    implementation coroutinesDependencies.coroutine_core
+    implementation coroutinesDependencies.coroutine_android
 
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    testImplementation testDependencies.junit
+    androidTestImplementation testDependencies.junit_test_android
+    androidTestImplementation testDependencies.espresso
     androidTestImplementation platform('androidx.compose:compose-bom:2023.08.00')
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
-    testImplementation "io.mockk:mockk:1.10.6"
-    testImplementation "com.google.truth:truth:1.1.2"
-    testImplementation "androidx.arch.core:core-testing:2.2.0"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0"
-
-    // Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1'
+    testImplementation testDependencies.mockk
+    testImplementation testDependencies.google_truth
+    testImplementation testDependencies.arch_core_test
+    testImplementation testDependencies.coroutine_test
 }

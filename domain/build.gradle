@@ -11,24 +11,16 @@ java {
 
 dependencies {
     // Coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1"
+    implementation coroutinesDependencies.coroutine_core
+    implementation coroutinesDependencies.coroutine_android
 
-    implementation 'com.google.dagger:hilt-core:2.48'
-    implementation("com.google.dagger:hilt-compiler:2.48")
+    implementation hiltDepedencies.dagger_hilt_core
+    implementation hiltDepedencies.hilt_core_compiler
 
-    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0'
+    implementation kotlinx_serialization
 
     //Testing
-    testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.mockito:mockito-core:2.11.0'
-    testImplementation 'android.arch.core:core-testing:1.1.1'
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0"
-// For Robolectric tests.
-    testImplementation("com.google.dagger:hilt-android-testing:2.28-alpha")
-// For instrumented tests.
-    testImplementation("com.google.dagger:hilt-android-testing:2.28-alpha")
-// ...with Kotlin.
-    kaptTest("com.google.dagger:hilt-android-compiler:2.40.5")
+    testImplementation testDependencies.junit
+    testImplementation testDependencies.coroutine_test
 
 }
