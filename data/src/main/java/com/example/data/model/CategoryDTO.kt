@@ -1,9 +1,13 @@
 package com.example.data.model
 
+import com.google.gson.annotations.SerializedName
+
 
 data class CategoryDTO(
-    val idCategory: String,
-    val strCategory: String,
-    val strCategoryThumb: String,
-    val strCategoryDescription: String
+    @SerializedName("idCategory")
+    val categoryID: String,
+    @SerializedName("strCategory")
+    val categoryName: String,
+    @SerializedName("strCategoryThumb")
+    val categoryThumb: String
 )

@@ -17,3 +17,4 @@ rootProject.name = "MVVMCleanArchApp"
 include ':app'
 include ':domain'
 include ':data'
+include ':presentation'

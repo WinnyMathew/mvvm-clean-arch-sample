@@ -11,9 +11,9 @@ class MealsMapper @Inject constructor() : ListMapper<MealsDTO, Meals> {
         it
     }.map { meals ->
         Meals(
-            mealID = meals.idMeal,
-            meal = meals.strMeal,
-            thumbImage = meals.strMealThumb
+            mealID = meals.id,
+            meal = meals.mealName,
+            thumbImage = meals.mealThumb
         )
     }
 }

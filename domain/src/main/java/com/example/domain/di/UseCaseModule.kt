@@ -1,9 +1,9 @@
 package com.example.domain.di
 
 import com.example.domain.repository.MealRepository
-import com.example.domain.use_case.GetCategoriesUseCase
-import com.example.domain.use_case.GetMealUseCase
-import com.example.domain.use_case.GetMealsUseCase
+import com.example.domain.usecase.GetCategoriesUseCase
+import com.example.domain.usecase.GetMealUseCase
+import com.example.domain.usecase.GetMealsUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,7 +11,7 @@ import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-object UseCaseModule {
+class UseCaseModule {
 
     @Provides
     fun provideGetCategoriesUseCase(repository: MealRepository): GetCategoriesUseCase {

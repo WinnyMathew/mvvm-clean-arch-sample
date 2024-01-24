@@ -1,10 +1,3 @@
 <resources>
     <string name="app_name">MVVMCleanArchApp</string>
-    <string name="category_image_cd">category-image</string>
-    <string name="categories_title">Categories</string>
-    <string name="dish_image_cd">dish-image</string>
-    <string name="back_icon_cd">back_icon</string>
-    <string name="meal_info_title">Meal Info</string>
-    <string name="instructions_header">Instructions</string>
-    <string name="meals_title">Meals</string>
 </resources>

@@ -21,6 +21,8 @@ dependencies {
 
     //Testing
     testImplementation testDependencies.junit
+    testImplementation testDependencies.mockk
+    testImplementation testDependencies.google_truth
     testImplementation testDependencies.coroutine_test
 
 }

@@ -10,10 +10,10 @@ apply from: "$rootDir/gradleScript/dependencies.gradle"
 
 android {
     namespace 'com.example.data'
-    compileSdk 34
+    compileSdk compile_sdk_version
 
     defaultConfig {
-        minSdk 24
+        minSdk min_sdk_version
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"

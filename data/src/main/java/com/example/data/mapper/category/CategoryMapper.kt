@@ -11,9 +11,9 @@ class CategoryMapper @Inject constructor(): ListMapper<CategoryDTO, Category> {
         it
     }.map { categoryDto ->
         Category(
-            id = categoryDto.idCategory,
-            category = categoryDto.strCategory,
-            thumbImage = categoryDto.strCategoryThumb
+            id = categoryDto.categoryID,
+            category = categoryDto.categoryName,
+            thumbImage = categoryDto.categoryThumb
         )
     }
 }

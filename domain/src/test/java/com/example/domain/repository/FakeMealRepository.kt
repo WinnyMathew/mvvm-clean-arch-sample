@@ -11,16 +11,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class FakeMealRepository: MealRepository {
-    override suspend fun getCategories() = flow {
-        emit(Response.Success(getCategory()))
-    }
+    override suspend fun getCategories() = Response.Success(getCategory())
 
-    override suspend fun getMealsByCategory(strCategory: String) = flow {
-        emit(Response.Success(getMeals()))
-    }
+    override suspend fun getMealsByCategory(strCategory: String) = Response.Success(getMeals())
 
-    override suspend fun getMealById(idMeal: String) = flow {
-        emit(Response.Success(listOf(getMealDetail())))
-    }
+    override suspend fun getMealById(idMeal: String) = Response.Success(listOf(getMealDetail()))
 
 }

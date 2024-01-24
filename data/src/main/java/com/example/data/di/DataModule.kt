@@ -2,21 +2,10 @@ package com.example.data.di
 
 import com.example.data.utils.Constants
 import com.example.data.api.MealApi
-import com.example.data.mapper.category.CategoryMapper
-import com.example.data.mapper.mealDetails.MealDetailMapper
-import com.example.data.mapper.meals.MealsMapper
-import com.example.data.repository.MealRepositoryImpl
-import com.example.data.repository.datasource.RemoteDataSource
-import com.example.data.repository.datasourceimpl.RemoteDataSourceImpl
-import com.example.domain.repository.MealRepository
-import com.example.domain.use_case.GetCategoriesUseCase
-import com.example.domain.use_case.GetMealUseCase
-import com.example.domain.use_case.GetMealsUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.CoroutineDispatcher
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

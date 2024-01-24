@@ -10,18 +10,16 @@ import com.example.domain.entity.Meals
 fun getCategoryDTO() = mutableListOf<CategoryDTO>().apply {
     add(
         CategoryDTO(
-            idCategory = "1",
-            strCategory = "Beef",
-            strCategoryThumb = "https://www.themealdb.com/images/category/beef.png",
-            strCategoryDescription = "https://www.themealdb.com/images/category/beef.png"
+            categoryID = "1",
+            categoryName = "Beef",
+            categoryThumb = "https://www.themealdb.com/images/category/beef.png"
         )
     )
     add(
         CategoryDTO(
-            idCategory = "2",
-            strCategory = "Chicken",
-            strCategoryThumb = "https://www.themealdb.com/images/category/chicken.png",
-            strCategoryDescription = "https://www.themealdb.com/images/category/beef.png"
+            categoryID = "2",
+            categoryName = "Chicken",
+            categoryThumb = "https://www.themealdb.com/images/category/chicken.png"
         )
     )
 }.toList()
@@ -30,16 +28,16 @@ fun getCategoryDTO() = mutableListOf<CategoryDTO>().apply {
 fun getMealsDTO() = mutableListOf<MealsDTO>().apply {
     add(
         MealsDTO(
-            idMeal = "52874",
-            strMeal = "Beef and Mustard Pie",
-            strMealThumb = "https://www.themealdb.com/images/media/meals/sytuqu1511553755.jpg"
+            id = "52874",
+            mealName = "Beef and Mustard Pie",
+            mealThumb = "https://www.themealdb.com/images/media/meals/sytuqu1511553755.jpg"
         )
     )
     add(
         MealsDTO(
-            idMeal = "52878",
-            strMeal = "Beef and Oyster pie",
-            strMealThumb = "https://www.themealdb.com/images/media/meals/wrssvt1511556563.jpg"
+            id = "52878",
+            mealName = "Beef and Oyster pie",
+            mealThumb = "https://www.themealdb.com/images/media/meals/wrssvt1511556563.jpg"
         )
     )
 }.toList()
@@ -64,27 +62,7 @@ fun getMealDetailDTO() = mutableListOf<MealDetailDTO>().apply {
                     "For the green beans, bring a saucepan of salted water to the boil, add the beans and cook for 4-5 minutes, or until just tender.\n" +
                     "Drain and toss with the butter, then season with black pepper.\n" +
                     "To serve, place a large spoonful of pie onto each plate with some green beans alongside.",
-            strMealThumb = "https://www.themealdb.com/images/media/meals/sytuqu1511553755.jpg",
-            strIngredient1 = "",
-            strIngredient2 = "",
-            strIngredient3 = "",
-            strIngredient4 = "",
-            strIngredient5 = "",
-            strIngredient6 = "",
-            strIngredient7 = "",
-            strIngredient8 = "",
-            strIngredient9 = "",
-            strIngredient10 = "",
-            strMeasure1 = "",
-            strMeasure2 = "",
-            strMeasure3 = "",
-            strMeasure4 = "",
-            strMeasure5 = "",
-            strMeasure6 = "",
-            strMeasure7 = "",
-            strMeasure8 = "",
-            strMeasure9 = "",
-            strMeasure10 = "",
+            strMealThumb = "https://www.themealdb.com/images/media/meals/sytuqu1511553755.jpg"
         )
     )
 }
