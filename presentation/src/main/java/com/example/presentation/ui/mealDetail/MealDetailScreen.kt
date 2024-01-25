@@ -20,6 +20,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -37,6 +38,7 @@ import com.example.presentation.ui.TextTitleMealInfo
 import com.example.presentation.ui.mealDetail.components.MealDetailItem
 import com.example.presentation.ui.mealDetail.components.MealInstructions
 import com.example.presentation.R
+import com.example.presentation.ui.UserMealIntent
 import com.example.presentation.ui.theme.AppDimens.UI_SIZE_10
 import com.example.presentation.ui.theme.AppDimens.UI_SIZE_15
 import com.example.presentation.ui.theme.AppDimens.UI_SIZE_30
@@ -48,6 +50,10 @@ fun MealDetailScreen(
     viewModel: MealDetailViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
+
+    LaunchedEffect(Unit) {
+        viewModel.userIntent.send(UserMealIntent.GetMealDetail)
+    }
     
     Box(Modifier.fillMaxSize()) {
         Column(

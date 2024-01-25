@@ -4,10 +4,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.Response
 import com.example.domain.usecase.GetCategoriesUseCase
+import com.example.presentation.ui.UserMealIntent
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,11 +19,24 @@ class CategoryListViewModel @Inject constructor(
     private val getCategoriesUseCase: GetCategoriesUseCase
 ): ViewModel() {
 
+    val userIntent = Channel<UserMealIntent>(Channel.UNLIMITED)
     private val _state = MutableStateFlow(CategoryListState())
     val state: StateFlow<CategoryListState> = _state.asStateFlow()
 
     init {
-        getCategories()
+        handleIntent()
+    }
+    private fun handleIntent() {
+        viewModelScope.launch {
+            userIntent.consumeAsFlow().collect {
+                when (it) {
+                    is UserMealIntent.GetMealCategories -> getCategories()
+                    else -> {
+                        // Do Nothing
+                    }
+                }
+            }
+        }
     }
 
     internal fun getCategories() {

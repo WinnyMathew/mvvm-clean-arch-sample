@@ -40,6 +40,7 @@ class CategoryListViewModelTest {
         coEvery { repository.getCategories() } returns expectedResult
 
         val viewModel = CategoryListViewModel(getCategoriesUseCase)
+        viewModel.getCategories()
 
         backgroundScope.launch {
             viewModel.state.collect{}
@@ -55,6 +56,7 @@ class CategoryListViewModelTest {
         coEvery { repository.getCategories() } returns expectedResult
 
         val viewModel = CategoryListViewModel(getCategoriesUseCase)
+        viewModel.getCategories()
 
         backgroundScope.launch {
             viewModel.state.collect {}

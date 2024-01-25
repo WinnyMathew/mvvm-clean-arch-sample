@@ -13,20 +13,27 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.presentation.ui.HeadingTextComponent
 import com.example.presentation.R
+import com.example.presentation.ui.UserMealIntent
 import com.example.presentation.ui.categoryList.components.SingleCategoryItem
 import com.example.presentation.ui.theme.AppDimens.UI_SIZE_10
 import com.example.presentation.ui.theme.AppDimens.UI_SIZE_15
+import kotlinx.coroutines.launch
 
 @Composable
 fun CategoriesScreen(
@@ -34,6 +41,11 @@ fun CategoriesScreen(
     viewModel: CategoryListViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
+
+    LaunchedEffect(Unit) {
+        viewModel.shouldLoadData = false
+        viewModel.userIntent.send(UserMealIntent.GetMealCategories)
+    }
 
     Box(Modifier.fillMaxSize()) {
         Column(Modifier.fillMaxWidth()) {
