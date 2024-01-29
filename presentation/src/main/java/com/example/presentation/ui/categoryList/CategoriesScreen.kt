@@ -43,7 +43,6 @@ fun CategoriesScreen(
     val state by viewModel.state.collectAsState()
 
     LaunchedEffect(Unit) {
-        viewModel.shouldLoadData = false
         viewModel.userIntent.send(UserMealIntent.GetMealCategories)
     }
 
