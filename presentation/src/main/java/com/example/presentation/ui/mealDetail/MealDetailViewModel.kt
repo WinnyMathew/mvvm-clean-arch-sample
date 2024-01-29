@@ -33,11 +33,8 @@ class MealDetailViewModel @Inject constructor(
     private fun handleIntent(idMeal: String) {
         viewModelScope.launch {
             userIntent.consumeAsFlow().collect {
-                when (it) {
-                    is UserMealIntent.GetMealDetail -> getMeal(idMeal)
-                    else -> {
-                        // Do Nothing
-                    }
+                if (it == UserMealIntent.GetMealDetail) {
+                    getMeal(idMeal)
                 }
             }
         }

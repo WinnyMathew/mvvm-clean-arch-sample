@@ -1,7 +1,4 @@
 package com.example.domain.entity
-
-
-
 data class MealDetail(
     val idMeal: String,
     val strMeal: String,

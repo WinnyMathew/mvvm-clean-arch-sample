@@ -24,7 +24,6 @@ import coil.compose.AsyncImage
 import com.example.domain.entity.Meals
 import com.example.presentation.R
 
-
 @Composable
 fun SingleMealItem(
     mealsItem: Meals,

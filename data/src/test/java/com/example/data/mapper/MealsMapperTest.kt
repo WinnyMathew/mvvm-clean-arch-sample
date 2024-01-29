@@ -2,7 +2,6 @@ package com.example.data.mapper
 
 import com.example.data.mapper.meals.MealsMapper
 import com.example.data.util.getMealsDTO
-import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -16,7 +15,7 @@ class MealsMapperTest {
     }
 
     @Test
-    fun mapCategoryDtoToCategory()  = runTest {
+    fun mapCategoryDtoToCategory() {
         val meals =
             mealMapper.map(getMealsDTO())
 

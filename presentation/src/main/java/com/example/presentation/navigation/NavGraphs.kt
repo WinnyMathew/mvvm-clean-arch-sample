@@ -37,7 +37,7 @@ fun NavGraphs() {
             route = "${Screen.MealsScreen.route}/{$PARAM_STR_CATEGORY}",
             arguments = listOf(navArgument(PARAM_STR_CATEGORY) { type = NavType.StringType })
         ) { navBackStackEntry ->
-            navBackStackEntry.arguments?.getString("strCategory")?.let {
+            navBackStackEntry.arguments?.getString(PARAM_STR_CATEGORY)?.let {
                 MealsScreen(
                     navController = navController,
                     onMealItemClick = { idMeal ->
@@ -52,7 +52,7 @@ fun NavGraphs() {
             route = "${Screen.MealDetailScreen.route}/{$PARAM_ID_MEAL}",
             arguments = listOf(navArgument(PARAM_ID_MEAL) { type = NavType.StringType })
         ) { navBackStackEntry ->
-            navBackStackEntry.arguments?.getString("idMeal")?.let {
+            navBackStackEntry.arguments?.getString(PARAM_ID_MEAL)?.let {
                 MealDetailScreen(navController = navController)
             }
         }

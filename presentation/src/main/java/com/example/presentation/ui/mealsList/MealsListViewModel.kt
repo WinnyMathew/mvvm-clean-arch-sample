@@ -34,11 +34,8 @@ class MealsListViewModel @Inject constructor(
     private fun handleIntent(strCategory: String) {
         viewModelScope.launch {
             userIntent.consumeAsFlow().collect {
-                when (it) {
-                    is UserMealIntent.GetMealsList -> getMeals(strCategory)
-                    else -> {
-                        // Do Nothing
-                    }
+                if (it == UserMealIntent.GetMealsList) {
+                    getMeals(strCategory)
                 }
             }
         }

@@ -34,7 +34,6 @@ import com.example.presentation.ui.HeadingTextComponent
 import com.example.presentation.R
 import com.example.presentation.ui.UserMealIntent
 import com.example.presentation.ui.mealsList.components.SingleMealItem
-import com.example.presentation.ui.theme.AppDimens
 import com.example.presentation.ui.theme.AppDimens.UI_SIZE_10
 import com.example.presentation.ui.theme.AppDimens.UI_SIZE_30
 import com.example.presentation.ui.theme.AppDimens.UI_SIZE_5

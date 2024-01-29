@@ -29,7 +29,6 @@ class RemoteDataSourceImplTest {
 
     private lateinit var remoteDataSourceImpl: RemoteDataSourceImpl
 
-
     private var apiService: MealApi = mockk()
 
     private lateinit var category: List<CategoryDTO>
@@ -51,69 +50,56 @@ class RemoteDataSourceImplTest {
     }
 
     @Test
-    fun `WHEN getCategories invoked THEN Response of Category list is RETURNED`() {
-        runTest {
-            coEvery { apiService.getCategories() } returns CategoryResponse(category)
+    fun `WHEN getCategories invoked THEN Response of Category list is RETURNED`() = runTest {
+        coEvery { apiService.getCategories() } returns CategoryResponse(category)
 
-            val data = remoteDataSourceImpl.getCategories()
+        val data = remoteDataSourceImpl.getCategories()
 
-            Assert.assertEquals(data, Response.Success(getCategory()))
-        }
+        Assert.assertEquals(data, Response.Success(getCategory()))
     }
 
     @Test
-    fun `WHEN getCategories invoked THEN Response of Error is RETURNED`() {
-        runTest {
-            coEvery { apiService.getCategories() } throws Exception("Error")
+    fun `WHEN getCategories invoked THEN Response of Error is RETURNED`() = runTest {
+        coEvery { apiService.getCategories() } throws Exception("Error")
 
-            val data = remoteDataSourceImpl.getCategories()
+        val data = remoteDataSourceImpl.getCategories()
 
-            Assert.assertEquals(data, Response.Error("Error"))
-        }
+        Assert.assertEquals(data, Response.Error("Error"))
     }
 
     @Test
-    fun `WHEN getMealsByCategory invoked THEN Response of Meals list is RETURNED`() {
-        runTest {
-            coEvery { apiService.getMealsByCategory("Beef") } returns MealsResponse(meals)
+    fun `WHEN getMealsByCategory invoked THEN Response of Meals list is RETURNED`() = runTest {
+        coEvery { apiService.getMealsByCategory("Beef") } returns MealsResponse(meals)
 
-            val data = remoteDataSourceImpl.getMealsByCategory("Beef")
+        val data = remoteDataSourceImpl.getMealsByCategory("Beef")
 
-            Assert.assertEquals(data, Response.Success(getMeals()))
-        }
+        Assert.assertEquals(data, Response.Success(getMeals()))
     }
 
     @Test
-    fun `WHEN getMealsByCategory invoked THEN Response of Error is RETURNED`() {
-        runTest {
-            coEvery { apiService.getMealsByCategory("Beef") } throws Exception("Error")
+    fun `WHEN getMealsByCategory invoked THEN Response of Error is RETURNED`() = runTest {
+        coEvery { apiService.getMealsByCategory("Beef") } throws Exception("Error")
 
-            val data = remoteDataSourceImpl.getMealsByCategory("Beef")
+        val data = remoteDataSourceImpl.getMealsByCategory("Beef")
 
-            Assert.assertEquals(data, Response.Error("Error"))
-        }
+        Assert.assertEquals(data, Response.Error("Error"))
     }
 
     @Test
-    fun `WHEN getMealById invoked THEN Response of Meal Detail is RETURNED`() {
-        runTest {
-            coEvery { apiService.getMealById("52874") } returns MealDetailResponse(mealDetail)
+    fun `WHEN getMealById invoked THEN Response of Meal Detail is RETURNED`() = runTest {
+        coEvery { apiService.getMealById("52874") } returns MealDetailResponse(mealDetail)
 
-            val data = remoteDataSourceImpl.getMealById("52874")
+        val data = remoteDataSourceImpl.getMealById("52874")
 
-            Assert.assertEquals(data, Response.Success(listOf(getMealDetail())))
-        }
+        Assert.assertEquals(data, Response.Success(listOf(getMealDetail())))
     }
 
     @Test
-    fun `WHEN getMealById invoked THEN Response of Error is RETURNED`() {
+    fun `WHEN getMealById invoked THEN Response of Error is RETURNED`() = runTest {
+        coEvery { apiService.getMealById("52874") } throws Exception("Error")
 
-        runTest {
-            coEvery { apiService.getMealById("52874") } throws Exception("Error")
+        val data = remoteDataSourceImpl.getMealById("52874")
 
-            val data = remoteDataSourceImpl.getMealById("52874")
-
-            Assert.assertEquals(data, Response.Error("Error"))
-        }
+        Assert.assertEquals(data, Response.Error("Error"))
     }
 }

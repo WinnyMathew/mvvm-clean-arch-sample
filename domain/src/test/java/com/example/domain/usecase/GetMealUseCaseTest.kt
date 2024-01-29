@@ -24,35 +24,31 @@ class GetMealUseCaseTest {
     }
 
     @Test
-    fun `WHEN getMealDetail invoked THEN MealDetail is RETURNED`() {
-        runBlocking {
-            when(val response = mealUseCaseTest(MEAL_ID)) {
-                is Response.Success -> {
-                    Assert.assertEquals("Beef and Mustard Pie", response.data?.get(0)?.strMeal)
-                    Assert.assertEquals("Beef", response.data?.get(0)?.strCategory)
-                    Assert.assertEquals("British", response.data?.get(0)?.strArea)
-                }
+    fun `WHEN getMealDetail invoked THEN MealDetail is RETURNED`() = runBlocking {
+        when (val response = mealUseCaseTest(MEAL_ID)) {
+            is Response.Success -> {
+                Assert.assertEquals("Beef and Mustard Pie", response.data?.get(0)?.strMeal)
+                Assert.assertEquals("Beef", response.data?.get(0)?.strCategory)
+                Assert.assertEquals("British", response.data?.get(0)?.strArea)
+            }
 
-                else -> {
-                    // Do Noting
-                }
+            else -> {
+                // Do Noting
             }
         }
     }
 
     @Test
-    fun `WHEN getMealDetail invoked THEN Error is RETURNED`() {
+    fun `WHEN getMealDetail invoked THEN Error is RETURNED`() = runBlocking {
         repository = mockk()
-        runBlocking {
-            coEvery { repository.getMealById(MEAL_ID) } returns Response.Error("Error")
-            when(val response = mealUseCaseTest(MEAL_ID)) {
-                is Response.Error -> {
-                    Assert.assertEquals("Error", response.message)
-                }
+        coEvery { repository.getMealById(MEAL_ID) } returns Response.Error("Error")
+        when (val response = mealUseCaseTest(MEAL_ID)) {
+            is Response.Error -> {
+                Assert.assertEquals("Error", response.message)
+            }
 
-                else -> {
-                    // Do Noting
-                }
+            else -> {
+                // Do Noting
             }
         }
     }

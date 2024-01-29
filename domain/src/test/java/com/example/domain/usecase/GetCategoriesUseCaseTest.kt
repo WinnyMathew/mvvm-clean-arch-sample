@@ -22,34 +22,30 @@ class GetCategoriesUseCaseTest {
     }
 
     @Test
-    fun `WHEN getCategory invoked THEN Category list is RETURNED`() {
-        runBlocking {
-            when(val response = categoriesUseCase()) {
-                is Response.Success -> {
-                    assertTrue(response.data?.size == 2)
-                    assertEquals("Beef", response.data?.get(0)?.category)
-                }
+    fun `WHEN getCategory invoked THEN Category list is RETURNED`() = runBlocking {
+        when (val response = categoriesUseCase()) {
+            is Response.Success -> {
+                assertTrue(response.data?.size == 2)
+                assertEquals("Beef", response.data?.get(0)?.category)
+            }
 
-                else -> {
-                    // Do Noting
-                }
+            else -> {
+                // Do Noting
             }
         }
     }
 
     @Test
-    fun `WHEN getCategory invoked THEN Error is RETURNED`() {
+    fun `WHEN getCategory invoked THEN Error is RETURNED`() = runBlocking {
         repository = mockk()
-        runBlocking {
-            coEvery { repository.getCategories() } returns Response.Error("Error")
-            when(val response = categoriesUseCase()) {
-                is Response.Error -> {
-                    assertEquals("Error", response.message)
-                }
+        coEvery { repository.getCategories() } returns Response.Error("Error")
+        when (val response = categoriesUseCase()) {
+            is Response.Error -> {
+                assertEquals("Error", response.message)
+            }
 
-                else -> {
-                    // Do Noting
-                }
+            else -> {
+                // Do Noting
             }
         }
     }
