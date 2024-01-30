@@ -20,9 +20,8 @@ dependencies {
     implementation kotlinx_serialization
 
     //Testing
-    testImplementation testDependencies.junit
-    testImplementation testDependencies.mockk
-    testImplementation testDependencies.google_truth
-    testImplementation testDependencies.coroutine_test
+    testImplementation testDeps.junit
+    testImplementation testDeps.mockk
+    testImplementation testDeps.coroutine_test
 
 }

@@ -9,7 +9,7 @@ plugins {
 apply from: "$rootDir/gradleScript/dependencies.gradle"
 
 android {
-    namespace 'com.example.data'
+    namespace 'com.meals.data'
     compileSdk compile_sdk_version
 
     defaultConfig {
@@ -56,10 +56,9 @@ dependencies {
     implementation kotlin_core
     implementation androidx_appcompat
     implementation android_material
-    testImplementation testDependencies.junit
-    testImplementation testDependencies.mockk
-    testImplementation testDependencies.google_truth
-    testImplementation testDependencies.coroutine_test
-    androidTestImplementation testDependencies.junit_test_android
-    androidTestImplementation testDependencies.espresso
+    testImplementation testDeps.junit
+    testImplementation testDeps.mockk
+    testImplementation testDeps.coroutine_test
+    androidTestImplementation testDeps.junit_test_android
+    androidTestImplementation testDeps.espresso
 }

@@ -81,7 +81,7 @@ ext {
     mockk_version = '1.10.6'
     google_truth_version = '1.1.2'
 
-    testDependencies = [
+    testDeps = [
             junit              : "junit:junit:${junit_version}",
             junit_test_android : "androidx.test.ext:junit:${androidx_junit_version}",
             espresso           : "androidx.test.espresso:espresso-core:${espresso_core_version}",

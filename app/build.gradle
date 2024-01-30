@@ -7,11 +7,11 @@ plugins {
 apply from: "$rootDir/gradleScript/dependencies.gradle"
 
 android {
-    namespace 'com.example.mvvmcleanarchapp'
+    namespace 'com.meals.mvvmcleanarchapp'
     compileSdk compile_sdk_version
 
     defaultConfig {
-        applicationId "com.example.mvvmcleanarchapp"
+        applicationId "com.meals.mvvmcleanarchapp"
         minSdk min_sdk_version
         targetSdk target_sdk_version
         versionCode version_code
@@ -75,4 +75,8 @@ dependencies {
     implementation hiltDepedencies.dagger_hilt
     kapt hiltDepedencies.hilt_android_compiler
     kapt hiltDepedencies.hilt_compiler
+
+    testImplementation testDeps.junit
+    androidTestImplementation testDeps.junit_test_android
+    androidTestImplementation testDeps.espresso
 }
