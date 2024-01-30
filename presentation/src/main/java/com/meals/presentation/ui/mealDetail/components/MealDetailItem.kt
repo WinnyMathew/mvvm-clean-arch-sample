@@ -24,6 +24,10 @@ import coil.compose.AsyncImage
 import com.meals.presentation.R
 import com.meals.presentation.ui.model.MealDetailUi
 import com.meals.presentation.ui.model.instructions
+import com.meals.presentation.ui.theme.AppDimens.UI_SIZE_1
+import com.meals.presentation.ui.theme.AppDimens.UI_SIZE_10
+import com.meals.presentation.ui.theme.AppDimens.UI_SIZE_180
+import com.meals.presentation.ui.theme.AppDimens.UI_SIZE_5
 
 @Composable
 fun MealDetailItem(
@@ -37,7 +41,7 @@ fun MealDetailItem(
     ) {
         Box(
             modifier = Modifier
-                .size(180.dp)
+                .size(UI_SIZE_180.dp)
                 .clip(MaterialTheme.shapes.medium)
         ) {
             AsyncImage(
@@ -56,7 +60,7 @@ fun MealDetailItem(
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 5.dp)
+                .padding(vertical = UI_SIZE_5.dp)
         )
         Text(
             text = mealInfo.strCategory,
@@ -65,7 +69,7 @@ fun MealDetailItem(
             color = MaterialTheme.colorScheme.primary,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 10.dp)
+                .padding(top = UI_SIZE_10.dp)
         )
         Text(
             text = mealInfo.strArea,
@@ -74,14 +78,14 @@ fun MealDetailItem(
             color = MaterialTheme.colorScheme.primary,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 5.dp)
+                .padding(bottom = UI_SIZE_5.dp)
         )
         Divider(
-            thickness = 1.dp,
+            thickness = UI_SIZE_1.dp,
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 5.dp, horizontal = 10.dp)
+                .padding(vertical = UI_SIZE_5.dp, horizontal = UI_SIZE_10.dp)
         )
     }
 }
@@ -93,7 +97,7 @@ fun MealInstructions(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(10.dp),
+            .padding(UI_SIZE_10.dp),
         contentAlignment = Alignment.TopStart
     ) {
         Text(
@@ -103,7 +107,7 @@ fun MealInstructions(
             lineHeight = 18.sp,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(5.dp)
+                .padding(UI_SIZE_5.dp)
         )
     }
 }

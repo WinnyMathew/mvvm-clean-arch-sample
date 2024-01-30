@@ -26,6 +26,11 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.meals.presentation.R
 import com.meals.presentation.ui.model.CategoryUi
+import com.meals.presentation.ui.theme.AppDimens.UI_SIZE_1
+import com.meals.presentation.ui.theme.AppDimens.UI_SIZE_10
+import com.meals.presentation.ui.theme.AppDimens.UI_SIZE_25
+import com.meals.presentation.ui.theme.AppDimens.UI_SIZE_5
+import com.meals.presentation.ui.theme.AppDimens.UI_SIZE_75
 
 @Composable
 fun SingleCategoryItem(
@@ -35,10 +40,10 @@ fun SingleCategoryItem(
     Card(
         Modifier
             .fillMaxWidth()
-            .padding(10.dp)
+            .padding(UI_SIZE_10.dp)
             .clickable { onCategoryItemClick(categoryItem.category) },
         elevation = CardDefaults.cardElevation(
-            defaultElevation = 10.dp
+            defaultElevation = UI_SIZE_10.dp
         ),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface
@@ -47,7 +52,7 @@ fun SingleCategoryItem(
         Row(
             Modifier
                 .fillMaxWidth()
-                .padding(PaddingValues(5.dp))
+                .padding(PaddingValues(UI_SIZE_5.dp))
         ) {
             AsyncImage(
                 model = categoryItem.thumbImage,
@@ -59,13 +64,13 @@ fun SingleCategoryItem(
             )
             Spacer(
                 modifier = Modifier
-                    .width(25.dp)
+                    .width(UI_SIZE_25.dp)
             )
             Divider(
                 color = MaterialTheme.colorScheme.primary.copy(0.4f),
                 modifier = Modifier
-                    .height(75.dp)
-                    .width(1.dp)
+                    .height(UI_SIZE_75.dp)
+                    .width(UI_SIZE_1.dp)
                     .align(CenterVertically)
             )
             Text(

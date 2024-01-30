@@ -23,6 +23,9 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.meals.presentation.R
 import com.meals.presentation.ui.model.MealsUi
+import com.meals.presentation.ui.theme.AppDimens.UI_SIZE_10
+import com.meals.presentation.ui.theme.AppDimens.UI_SIZE_140
+import com.meals.presentation.ui.theme.AppDimens.UI_SIZE_5
 
 @Composable
 fun SingleMealItem(
@@ -31,12 +34,12 @@ fun SingleMealItem(
 ) {
     Card(
         Modifier
-            .padding(10.dp)
+            .padding(UI_SIZE_10.dp)
             .fillMaxWidth()
-            .heightIn(max = 140.dp)
+            .heightIn(max = UI_SIZE_140.dp)
             .clickable { onMealItemClick(mealsItem.mealID) },
         elevation = CardDefaults.cardElevation(
-            defaultElevation = 10.dp
+            defaultElevation = UI_SIZE_10.dp
         ),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface
@@ -47,7 +50,7 @@ fun SingleMealItem(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Box(modifier = Modifier.size(140.dp)) {
+            Box(modifier = Modifier.size(UI_SIZE_140.dp)) {
                 AsyncImage(
                     model = mealsItem.thumbImage,
                     contentDescription = stringResource(R.string.dish_image_cd),
@@ -65,7 +68,7 @@ fun SingleMealItem(
                 color = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(5.dp)
+                    .padding(UI_SIZE_5.dp)
             )
         }
     }
