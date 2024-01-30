@@ -4,6 +4,7 @@ import com.meals.domain.Response
 import com.meals.domain.repository.MealRepository
 import com.meals.domain.usecase.GetCategoriesUseCase
 import com.meals.presentation.ui.getCategory
+import com.meals.presentation.ui.mapper.categoryUi.CategoryUiMapper
 import io.mockk.MockKAnnotations
 import io.mockk.clearAllMocks
 import io.mockk.coEvery
@@ -24,6 +25,7 @@ class CategoryListViewModelTest {
     private val repository: MealRepository = mockk()
     private lateinit var getCategoriesUseCase: GetCategoriesUseCase
     private lateinit var testDispatcher: TestDispatcher
+    private val categoryUiMapper = CategoryUiMapper()
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Before
@@ -39,7 +41,7 @@ class CategoryListViewModelTest {
         val expectedResult = Response.Loading
         coEvery { repository.getCategories() } returns expectedResult
 
-        val viewModel = CategoryListViewModel(getCategoriesUseCase)
+        val viewModel = CategoryListViewModel(getCategoriesUseCase, categoryUiMapper)
         viewModel.getCategories()
 
         backgroundScope.launch {
@@ -55,7 +57,7 @@ class CategoryListViewModelTest {
         val expectedResult = Response.Success(getCategory())
         coEvery { repository.getCategories() } returns expectedResult
 
-        val viewModel = CategoryListViewModel(getCategoriesUseCase)
+        val viewModel = CategoryListViewModel(getCategoriesUseCase, categoryUiMapper)
         viewModel.getCategories()
 
         backgroundScope.launch {
@@ -72,7 +74,7 @@ class CategoryListViewModelTest {
         val expectedResult = Response.Error("Error")
         coEvery { repository.getCategories() } returns expectedResult
 
-        val viewModel = CategoryListViewModel(getCategoriesUseCase)
+        val viewModel = CategoryListViewModel(getCategoriesUseCase, categoryUiMapper)
         viewModel.getCategories()
 
         backgroundScope.launch {

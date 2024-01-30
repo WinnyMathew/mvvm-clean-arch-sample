@@ -5,21 +5,19 @@ import androidx.lifecycle.viewModelScope
 import com.meals.domain.Response
 import com.meals.domain.usecase.GetCategoriesUseCase
 import com.meals.presentation.ui.UserMealIntent
+import com.meals.presentation.ui.mapper.categoryUi.CategoryUiMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class CategoryListViewModel @Inject constructor(
-    private val getCategoriesUseCase: GetCategoriesUseCase
+    private val getCategoriesUseCase: GetCategoriesUseCase,
+    private val categoryUiMapper: CategoryUiMapper
 ): ViewModel() {
-
-    val userIntent = Channel<UserMealIntent>(Channel.UNLIMITED)
     private val _state = MutableStateFlow(CategoryListState())
     val state: StateFlow<CategoryListState> = _state.asStateFlow()
 
@@ -39,7 +37,7 @@ class CategoryListViewModel @Inject constructor(
             when (val result = getCategoriesUseCase.invoke()) {
                 is Response.Success -> {
                     _state.value = CategoryListState(
-                        categories = result.data ?: emptyList()
+                        categories = categoryUiMapper.map(result.data ?: emptyList())
                     )
                 }
                 is Response.Error -> {

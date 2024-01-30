@@ -6,6 +6,7 @@ import com.meals.domain.Response
 import com.meals.domain.repository.MealRepository
 import com.meals.domain.usecase.GetMealUseCase
 import com.meals.presentation.ui.getMealDetail
+import com.meals.presentation.ui.mapper.mealDetailUi.MealDetailUiMapper
 import io.mockk.MockKAnnotations
 import io.mockk.clearAllMocks
 import io.mockk.coEvery
@@ -31,6 +32,7 @@ class MealDetailViewModelTest {
     private lateinit var getMealUseCase: GetMealUseCase
     private lateinit var testDispatcher: TestDispatcher
     private lateinit var savedStateHandle: SavedStateHandle
+    private val mealDetailUiMapper = MealDetailUiMapper()
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Before
@@ -47,7 +49,7 @@ class MealDetailViewModelTest {
         val expectedResult = Response.Loading
         coEvery { repository.getMealById(MEAL_ID)} returns expectedResult
 
-        val viewModel = MealDetailViewModel(getMealUseCase, savedStateHandle)
+        val viewModel = MealDetailViewModel(getMealUseCase, mealDetailUiMapper, savedStateHandle)
         viewModel.getMeal(MEAL_ID)
 
         backgroundScope.launch {
@@ -63,7 +65,7 @@ class MealDetailViewModelTest {
         val expectedResult = Response.Success(listOf(getMealDetail()))
         coEvery { repository.getMealById(MEAL_ID)} returns expectedResult
 
-        val viewModel = MealDetailViewModel(getMealUseCase, savedStateHandle)
+        val viewModel = MealDetailViewModel(getMealUseCase, mealDetailUiMapper, savedStateHandle)
         viewModel.getMeal(MEAL_ID)
 
         backgroundScope.launch {
@@ -81,7 +83,7 @@ class MealDetailViewModelTest {
         val expectedResult = Response.Error("Error")
         coEvery { repository.getMealById(MEAL_ID) } returns expectedResult
 
-        val viewModel = MealDetailViewModel(getMealUseCase, savedStateHandle)
+        val viewModel = MealDetailViewModel(getMealUseCase, mealDetailUiMapper, savedStateHandle)
         viewModel.getMeal(MEAL_ID)
 
         backgroundScope.launch {

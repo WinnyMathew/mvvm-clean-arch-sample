@@ -21,13 +21,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.meals.domain.entity.MealDetail
-import com.meals.domain.entity.instructions
 import com.meals.presentation.R
+import com.meals.presentation.ui.model.MealDetailUi
+import com.meals.presentation.ui.model.instructions
 
 @Composable
 fun MealDetailItem(
-    mealInfo: MealDetail
+    mealInfo: MealDetailUi
 ) {
     Column(
         verticalArrangement = Arrangement.Center,
@@ -88,7 +88,7 @@ fun MealDetailItem(
 
 @Composable
 fun MealInstructions(
-    mealInfo: MealDetail
+    mealInfo: MealDetailUi
 ) {
     Box(
         modifier = Modifier

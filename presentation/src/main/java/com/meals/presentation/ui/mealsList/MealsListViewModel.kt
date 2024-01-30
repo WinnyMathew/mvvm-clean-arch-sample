@@ -7,18 +7,18 @@ import com.meals.data.utils.Constants.PARAM_STR_CATEGORY
 import com.meals.domain.Response
 import com.meals.domain.usecase.GetMealsUseCase
 import com.meals.presentation.ui.UserMealIntent
+import com.meals.presentation.ui.mapper.mealsUi.MealsUiMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MealsListViewModel @Inject constructor(
     private val getMealsUseCase: GetMealsUseCase,
+    private val mealsUiMapper: MealsUiMapper,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     private val _state = MutableStateFlow(MealsListState())
@@ -41,7 +41,7 @@ class MealsListViewModel @Inject constructor(
             when (val result = getMealsUseCase(strCategory)) {
                 is Response.Success -> {
                     _state.value = MealsListState(
-                        meals = result.data ?: emptyList()
+                        meals = mealsUiMapper.map(result.data ?: emptyList())
                     )
                 }
 

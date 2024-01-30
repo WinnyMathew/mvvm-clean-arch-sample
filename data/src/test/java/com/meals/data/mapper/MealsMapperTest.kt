@@ -15,7 +15,7 @@ class MealsMapperTest {
     }
 
     @Test
-    fun mapCategoryDtoToCategory() {
+    fun mapMealsDtoToMealsList() {
         val meals =
             mealMapper.map(getMealsDTO())
 

@@ -7,7 +7,3 @@ data class MealDetail(
     val strInstructions: String,
     val strMealThumb: String
 )
- fun MealDetail.instructions() = this.strInstructions
-    .replace("\\r\\n", "\n")
-    .replace("\n", "\n\n")
-    .trim()

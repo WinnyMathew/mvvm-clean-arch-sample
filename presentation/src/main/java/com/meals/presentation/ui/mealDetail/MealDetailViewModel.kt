@@ -7,18 +7,18 @@ import com.meals.data.utils.Constants.PARAM_ID_MEAL
 import com.meals.domain.Response
 import com.meals.domain.usecase.GetMealUseCase
 import com.meals.presentation.ui.UserMealIntent
+import com.meals.presentation.ui.mapper.mealDetailUi.MealDetailUiMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MealDetailViewModel @Inject constructor(
     private val getMealUseCase: GetMealUseCase,
+    private val mealDetailUiMapper: MealDetailUiMapper,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     private val _state = MutableStateFlow(MealDetailState())
@@ -41,7 +41,7 @@ class MealDetailViewModel @Inject constructor(
             when (val result = getMealUseCase(idMeal)) {
                 is Response.Success -> {
                     _state.value = MealDetailState(
-                        meals = result.data ?: emptyList()
+                        meals = mealDetailUiMapper.map(result.data ?: emptyList())
                     )
                 }
 

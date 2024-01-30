@@ -21,12 +21,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.meals.domain.entity.Meals
 import com.meals.presentation.R
+import com.meals.presentation.ui.model.MealsUi
 
 @Composable
 fun SingleMealItem(
-    mealsItem: Meals,
+    mealsItem: MealsUi,
     onMealItemClick: (String) -> Unit
 ) {
     Card(

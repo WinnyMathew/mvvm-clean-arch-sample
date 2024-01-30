@@ -24,12 +24,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.meals.domain.entity.Category
 import com.meals.presentation.R
+import com.meals.presentation.ui.model.CategoryUi
 
 @Composable
 fun SingleCategoryItem(
-    categoryItem: Category,
+    categoryItem: CategoryUi,
     onCategoryItemClick: (String) -> Unit
 ) {
     Card(
