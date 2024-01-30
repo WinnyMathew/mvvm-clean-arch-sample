@@ -11,7 +11,7 @@ import com.meals.domain.entity.MealDetail
 import com.meals.domain.entity.Meals
 import javax.inject.Inject
 
-class RemoteDataSourceIMPL @Inject constructor(
+class RemoteDataSourceImpl @Inject constructor(
     private val apiService: MealApi,
     private val categoryMapper: CategoryMapper,
     private val mealsMapper: MealsMapper,

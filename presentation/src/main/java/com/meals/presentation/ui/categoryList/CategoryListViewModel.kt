@@ -24,15 +24,12 @@ class CategoryListViewModel @Inject constructor(
     val state: StateFlow<CategoryListState> = _state.asStateFlow()
 
     init {
-        handleIntent()
+        handleIntent(UserMealIntent.GetMealCategories)
     }
-    private fun handleIntent() {
-        viewModelScope.launch {
-            userIntent.consumeAsFlow().collect {
-                if (it == UserMealIntent.GetMealCategories) {
-                    getCategories()
-                }
-            }
+
+    private fun handleIntent(userMealIntent: UserMealIntent) {
+        if (userMealIntent == UserMealIntent.GetMealCategories) {
+            getCategories()
         }
     }
 

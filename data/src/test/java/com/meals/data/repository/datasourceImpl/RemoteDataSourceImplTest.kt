@@ -4,11 +4,11 @@ import com.meals.data.api.MealApi
 import com.meals.data.mapper.category.CategoryMapper
 import com.meals.data.mapper.mealDetails.MealDetailMapper
 import com.meals.data.mapper.meals.MealsMapper
-import com.meals.data.model.CategoryDTO
+import com.meals.data.model.CategoryDto
 import com.meals.data.model.CategoryResponse
-import com.meals.data.model.MealDetailDTO
+import com.meals.data.model.MealDetailDto
 import com.meals.data.model.MealDetailResponse
-import com.meals.data.model.MealsDTO
+import com.meals.data.model.MealsDto
 import com.meals.data.model.MealsResponse
 import com.meals.data.util.getCategory
 import com.meals.data.util.getCategoryDTO
@@ -27,18 +27,18 @@ import org.junit.Test
 
 class RemoteDataSourceImplTest {
 
-    private lateinit var remoteDataSourceImpl: RemoteDataSourceIMPL
+    private lateinit var remoteDataSourceImpl: RemoteDataSourceImpl
 
     private var apiService: MealApi = mockk()
 
-    private lateinit var category: List<CategoryDTO>
-    private lateinit var meals: List<MealsDTO>
-    private lateinit var mealDetail: List<MealDetailDTO>
+    private lateinit var category: List<CategoryDto>
+    private lateinit var meals: List<MealsDto>
+    private lateinit var mealDetail: List<MealDetailDto>
 
     @Before
     fun setUp() {
         MockKAnnotations.init(this)
-        remoteDataSourceImpl = RemoteDataSourceIMPL(
+        remoteDataSourceImpl = RemoteDataSourceImpl(
             apiService,
             CategoryMapper(),
             MealsMapper(),

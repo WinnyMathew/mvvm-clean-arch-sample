@@ -4,7 +4,7 @@ import com.meals.domain.datasource.RemoteDataSource
 import com.meals.domain.repository.MealRepository
 import javax.inject.Inject
 
-class MealRepositoryIMPL @Inject constructor(
+class MealRepositoryImpl @Inject constructor(
     private val remoteDataSource: RemoteDataSource
 ) : MealRepository {
     override suspend fun getCategories() = remoteDataSource.getCategories()

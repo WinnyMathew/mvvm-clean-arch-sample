@@ -18,7 +18,7 @@ import org.junit.Test
 
 class MealRepositoryImplTest {
 
-    private lateinit var repositoryImpl: MealRepositoryIMPL
+    private lateinit var repositoryImpl: MealRepositoryImpl
     private var remoteDataSource: RemoteDataSource = mockk()
 
     private lateinit var category: List<Category>
@@ -28,7 +28,7 @@ class MealRepositoryImplTest {
     @Before
     fun setUp() {
         MockKAnnotations.init(this)
-        repositoryImpl = MealRepositoryIMPL(remoteDataSource)
+        repositoryImpl = MealRepositoryImpl(remoteDataSource)
         category = getCategory()
         meals = getMeals()
         mealDetail = listOf(getMealDetail())

@@ -50,10 +50,6 @@ fun MealDetailScreen(
     viewModel: MealDetailViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
-
-    LaunchedEffect(Unit) {
-        viewModel.userIntent.send(UserMealIntent.GetMealDetail)
-    }
     
     Box(Modifier.fillMaxSize()) {
         Column(

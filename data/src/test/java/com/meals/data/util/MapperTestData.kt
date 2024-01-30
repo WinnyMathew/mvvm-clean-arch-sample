@@ -1,22 +1,22 @@
 package com.meals.data.util
 
-import com.meals.data.model.CategoryDTO
-import com.meals.data.model.MealDetailDTO
-import com.meals.data.model.MealsDTO
+import com.meals.data.model.CategoryDto
+import com.meals.data.model.MealDetailDto
+import com.meals.data.model.MealsDto
 import com.meals.domain.entity.Category
 import com.meals.domain.entity.MealDetail
 import com.meals.domain.entity.Meals
 
-fun getCategoryDTO() = mutableListOf<CategoryDTO>().apply {
+fun getCategoryDTO() = mutableListOf<CategoryDto>().apply {
     add(
-        CategoryDTO(
+        CategoryDto(
             categoryID = "1",
             categoryName = "Beef",
             categoryThumb = "https://www.themealdb.com/images/category/beef.png"
         )
     )
     add(
-        CategoryDTO(
+        CategoryDto(
             categoryID = "2",
             categoryName = "Chicken",
             categoryThumb = "https://www.themealdb.com/images/category/chicken.png"
@@ -25,16 +25,16 @@ fun getCategoryDTO() = mutableListOf<CategoryDTO>().apply {
 }.toList()
 
 
-fun getMealsDTO() = mutableListOf<MealsDTO>().apply {
+fun getMealsDTO() = mutableListOf<MealsDto>().apply {
     add(
-        MealsDTO(
+        MealsDto(
             id = "52874",
             mealName = "Beef and Mustard Pie",
             mealThumb = "https://www.themealdb.com/images/media/meals/sytuqu1511553755.jpg"
         )
     )
     add(
-        MealsDTO(
+        MealsDto(
             id = "52878",
             mealName = "Beef and Oyster pie",
             mealThumb = "https://www.themealdb.com/images/media/meals/wrssvt1511556563.jpg"
@@ -42,9 +42,9 @@ fun getMealsDTO() = mutableListOf<MealsDTO>().apply {
     )
 }.toList()
 
-fun getMealDetailDTO() = mutableListOf<MealDetailDTO>().apply {
+fun getMealDetailDTO() = mutableListOf<MealDetailDto>().apply {
     add(
-        MealDetailDTO(
+        MealDetailDto(
             idMeal = "52874",
             strMeal = "Beef and Mustard Pie",
             strCategory = "Beef",

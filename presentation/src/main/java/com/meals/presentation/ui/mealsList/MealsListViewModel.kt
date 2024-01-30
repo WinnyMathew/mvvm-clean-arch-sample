@@ -21,25 +21,20 @@ class MealsListViewModel @Inject constructor(
     private val getMealsUseCase: GetMealsUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
-
-    val userIntent = Channel<UserMealIntent>(Channel.UNLIMITED)
     private val _state = MutableStateFlow(MealsListState())
     val state: StateFlow<MealsListState> = _state.asStateFlow()
     init {
         savedStateHandle.get<String>(PARAM_STR_CATEGORY)?.let { strCategory ->
-            handleIntent(strCategory)
+            handleIntent(UserMealIntent.GetMealsList, strCategory)
         }
     }
 
-    private fun handleIntent(strCategory: String) {
-        viewModelScope.launch {
-            userIntent.consumeAsFlow().collect {
-                if (it == UserMealIntent.GetMealsList) {
-                    getMeals(strCategory)
-                }
-            }
+    private fun handleIntent(userMealIntent: UserMealIntent, strCategory: String) {
+        if (userMealIntent == UserMealIntent.GetMealsList) {
+            getMeals(strCategory)
         }
     }
+
     internal fun getMeals(strCategory: String) {
         viewModelScope.launch {
             _state.value = MealsListState(isLoading = true)

@@ -1,13 +1,13 @@
 package com.meals.data.mapper.meals
 
 import com.meals.data.mapper.ListMapper
-import com.meals.data.model.MealsDTO
+import com.meals.data.model.MealsDto
 import com.meals.domain.entity.Meals
 import javax.inject.Inject
 
-class MealsMapper @Inject constructor() : ListMapper<MealsDTO, Meals> {
+class MealsMapper @Inject constructor() : ListMapper<MealsDto, Meals> {
 
-    override fun map(data: List<MealsDTO>) = data.map {
+    override fun map(data: List<MealsDto>) = data.map {
         it
     }.map { meals ->
         Meals(

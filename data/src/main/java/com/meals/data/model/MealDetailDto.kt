@@ -3,7 +3,7 @@ package com.meals.data.model
 import com.google.gson.annotations.SerializedName
 
 
-data class MealDetailDTO(
+data class MealDetailDto(
     @SerializedName("idMeal")
     val idMeal: String,
     @SerializedName("strMeal")

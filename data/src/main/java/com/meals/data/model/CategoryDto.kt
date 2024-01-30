@@ -3,7 +3,7 @@ package com.meals.data.model
 import com.google.gson.annotations.SerializedName
 
 
-data class CategoryDTO(
+data class CategoryDto(
     @SerializedName("idCategory")
     val categoryID: String,
     @SerializedName("strCategory")

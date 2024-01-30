@@ -46,10 +46,6 @@ fun MealsScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
-    LaunchedEffect(Unit) {
-        viewModel.userIntent.send(UserMealIntent.GetMealsList)
-    }
-
     Box(Modifier.fillMaxSize()){
         Column(Modifier.fillMaxWidth()) {
             Row(

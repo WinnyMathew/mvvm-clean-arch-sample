@@ -1,5 +1,5 @@
 package com.meals.data.model
 
 data class MealsResponse(
-    val meals: List<MealsDTO>
+    val meals: List<MealsDto>
 )
