@@ -69,7 +69,7 @@ ext {
     retrofitDependencies = [
             okhttp                    :  "com.squareup.okhttp3:okhttp:${okhttp_version}",
             okhttp_logging_iterceptor :  "com.squareup.okhttp3:logging-interceptor:${okhttp_logging_iterceptor_version}",
-            retrofit          :  "com.squareup.retrofit2:retrofit:${retrofit_version}",
+            retrofit                  :  "com.squareup.retrofit2:retrofit:${retrofit_version}",
             gson_convertor            :  "com.squareup.retrofit2:converter-gson:${gson_convertor_version}"
     ]
 
@@ -79,7 +79,6 @@ ext {
     arch_testing_version = '2.2.0'
     coroutine_testing_version = '1.5.0'
     mockk_version = '1.10.6'
-    google_truth_version = '1.1.2'
 
     testDeps = [
             junit              : "junit:junit:${junit_version}",
@@ -87,7 +86,6 @@ ext {
             espresso           : "androidx.test.espresso:espresso-core:${espresso_core_version}",
             arch_core_test     : "androidx.arch.core:core-testing:${arch_testing_version}",
             coroutine_test     : "org.jetbrains.kotlinx:kotlinx-coroutines-test:${coroutine_testing_version}",
-            mockk              : "io.mockk:mockk:${mockk_version}",
-            google_truth       : "com.google.truth:truth:${google_truth_version}",
+            mockk              : "io.mockk:mockk:${mockk_version}"
     ]
 }

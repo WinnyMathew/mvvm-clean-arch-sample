@@ -18,30 +18,24 @@ class RemoteDataSourceImpl @Inject constructor(
     private val mealDetailMapper: MealDetailMapper
 ) : RemoteDataSource {
 
-    override suspend fun getCategories(): Response<List<Category>> {
-        return try {
-            val data = categoryMapper.map(apiService.getCategories().categories)
-            Response.Success(data)
-        } catch (e: Exception) {
-            Response.Error(e.localizedMessage ?: "An unexpected error occurred")
-        }
+    override suspend fun getCategories() = try {
+        val data = categoryMapper.map(apiService.getCategories().categories)
+        Response.Success(data)
+    } catch (e: Exception) {
+        Response.Error(e.localizedMessage ?: "An unexpected error occurred")
     }
 
-    override suspend fun getMealsByCategory(strCategory: String): Response<List<Meals>> {
-        return try {
-            val data = mealsMapper.map(apiService.getMealsByCategory(strCategory).meals)
-            Response.Success(data)
-        } catch (e: Exception) {
-            Response.Error(e.localizedMessage ?: "An unexpected error occurred")
-        }
+    override suspend fun getMealsByCategory(strCategory: String) = try {
+        val data = mealsMapper.map(apiService.getMealsByCategory(strCategory).meals)
+        Response.Success(data)
+    } catch (e: Exception) {
+        Response.Error(e.localizedMessage ?: "An unexpected error occurred")
     }
 
-    override suspend fun getMealById(idMeal: String): Response<List<MealDetail>> {
-        return try {
-            val data = mealDetailMapper.map(apiService.getMealById(idMeal).meals)
-            Response.Success(data)
-        } catch (e: Exception) {
-            Response.Error(e.localizedMessage ?: "An unexpected error occurred")
-        }
+    override suspend fun getMealById(idMeal: String) = try {
+        val data = mealDetailMapper.map(apiService.getMealById(idMeal).meals)
+        Response.Success(data)
+    } catch (e: Exception) {
+        Response.Error(e.localizedMessage ?: "An unexpected error occurred")
     }
 }
