@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.meals.domain.Response
 import com.meals.domain.usecase.GetCategoriesUseCase
-import com.meals.presentation.ui.UserMealIntent
+import com.meals.presentation.ui.categoryList.CategoryScreenIntent.GetMealCategories
 import com.meals.presentation.ui.mapper.categoryUi.CategoryUiMapper
 import com.meals.presentation.utils.CoroutineContextProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,12 +24,12 @@ class CategoryListViewModel @Inject constructor(
     val state: StateFlow<CategoryListState> = _state.asStateFlow()
 
     init {
-        handleIntent(UserMealIntent.GetMealCategories)
+        handleIntent(GetMealCategories)
     }
 
-    private fun handleIntent(userMealIntent: UserMealIntent) {
-        if (userMealIntent == UserMealIntent.GetMealCategories) {
-            getCategories()
+    private fun handleIntent(categoryScreenIntent: CategoryScreenIntent) {
+        when (categoryScreenIntent) {
+            is GetMealCategories -> getCategories()
         }
     }
 

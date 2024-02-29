@@ -6,8 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.meals.data.utils.Constants.PARAM_ID_MEAL
 import com.meals.domain.Response
 import com.meals.domain.usecase.GetMealUseCase
-import com.meals.presentation.ui.UserMealIntent
 import com.meals.presentation.ui.mapper.mealDetailUi.MealDetailUiMapper
+import com.meals.presentation.ui.mealDetail.MealDetailScreenIntent.GetMealDetail
 import com.meals.presentation.utils.CoroutineContextProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -27,13 +27,13 @@ class MealDetailViewModel @Inject constructor(
     val state: StateFlow<MealDetailState> = _state.asStateFlow()
     init {
         savedStateHandle.get<String>(PARAM_ID_MEAL)?.let { idMeal ->
-            handleIntent(UserMealIntent.GetMealDetail, idMeal)
+            handleIntent(GetMealDetail, idMeal)
         }
     }
 
-    private fun handleIntent(userMealIntent: UserMealIntent, idMeal: String) {
-        if (userMealIntent == UserMealIntent.GetMealDetail) {
-            getMeal(idMeal)
+    private fun handleIntent(mealDetailIntent: MealDetailScreenIntent, idMeal: String) {
+        when (mealDetailIntent) {
+            is GetMealDetail -> getMeal(idMeal)
         }
     }
 
