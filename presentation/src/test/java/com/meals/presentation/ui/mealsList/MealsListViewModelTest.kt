@@ -45,15 +45,18 @@ class MealsListViewModelTest {
     }
 
     @Test
-    fun `WHEN getMeals invoked THEN Loading State is RETURNED`() = runTest {
+    fun `WHEN getMeals invoked THEN Loading State is RETURNED`() {
         val expectedResult = Response.Loading
         coEvery { repository.getMealsByCategory(CATEGORY_STRING)} returns expectedResult
 
-        val viewModel = MealsListViewModel(getMealsUseCase, mealsUiMapper, savedStateHandle)
-        viewModel.getMeals(CATEGORY_STRING)
+        val viewModel = MealsListViewModel(
+            getMealsUseCase = getMealsUseCase,
+            mealsUiMapper = mealsUiMapper,
+            savedStateHandle = savedStateHandle
+        )
 
-        backgroundScope.launch {
-            viewModel.state.collect{}
+        runTest {
+            viewModel.getMeals(CATEGORY_STRING)
         }
 
         assertTrue(viewModel.state.value.isLoading)
@@ -61,15 +64,18 @@ class MealsListViewModelTest {
     }
 
     @Test
-    fun `WHEN getMeals invoked THEN Meals list is RETURNED`() = runTest {
+    fun `WHEN getMeals invoked THEN Meals list is RETURNED`() {
         val expectedResult = Response.Success(getMeals())
         coEvery { repository.getMealsByCategory(CATEGORY_STRING)} returns expectedResult
 
-        val viewModel = MealsListViewModel(getMealsUseCase, mealsUiMapper, savedStateHandle)
-        viewModel.getMeals(CATEGORY_STRING)
+        val viewModel = MealsListViewModel(
+            getMealsUseCase = getMealsUseCase,
+            mealsUiMapper = mealsUiMapper,
+            savedStateHandle = savedStateHandle
+        )
 
-        backgroundScope.launch {
-            viewModel.state.collect{}
+        runTest {
+            viewModel.getMeals(CATEGORY_STRING)
         }
 
         assertFalse(viewModel.state.value.isLoading)
@@ -78,15 +84,18 @@ class MealsListViewModelTest {
     }
 
     @Test
-    fun `WHEN getMeals invoked THEN Error is RETURNED`() = runTest {
+    fun `WHEN getMeals invoked THEN Error is RETURNED`() {
         val expectedResult = Response.Error("Error")
         coEvery { repository.getMealsByCategory(CATEGORY_STRING)} returns expectedResult
 
-        val viewModel = MealsListViewModel(getMealsUseCase, mealsUiMapper, savedStateHandle)
-        viewModel.getMeals(CATEGORY_STRING)
+        val viewModel = MealsListViewModel(
+            getMealsUseCase = getMealsUseCase,
+            mealsUiMapper = mealsUiMapper,
+            savedStateHandle = savedStateHandle
+        )
 
-        backgroundScope.launch {
-            viewModel.state.collect{}
+        runTest {
+            viewModel.getMeals(CATEGORY_STRING)
         }
 
         assertFalse(viewModel.state.value.isLoading)

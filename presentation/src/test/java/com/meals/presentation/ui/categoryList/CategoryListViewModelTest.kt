@@ -37,15 +37,14 @@ class CategoryListViewModelTest {
     }
 
     @Test
-    fun `WHEN getCategory invoked THEN Loading state is RETURNED`() = runTest {
+    fun `WHEN getCategory invoked THEN Loading state is RETURNED`() {
         val expectedResult = Response.Loading
         coEvery { repository.getCategories() } returns expectedResult
 
         val viewModel = CategoryListViewModel(getCategoriesUseCase, categoryUiMapper)
-        viewModel.getCategories()
 
-        backgroundScope.launch {
-            viewModel.state.collect{}
+        runTest {
+            viewModel.getCategories()
         }
 
         assert(viewModel.state.value.isLoading)
@@ -53,15 +52,14 @@ class CategoryListViewModelTest {
     }
 
     @Test
-    fun `WHEN getCategory invoked THEN Category list is RETURNED`() = runTest {
+    fun `WHEN getCategory invoked THEN Category list is RETURNED`() {
         val expectedResult = Response.Success(getCategory())
         coEvery { repository.getCategories() } returns expectedResult
 
         val viewModel = CategoryListViewModel(getCategoriesUseCase, categoryUiMapper)
-        viewModel.getCategories()
 
-        backgroundScope.launch {
-            viewModel.state.collect{}
+        runTest {
+            viewModel.getCategories()
         }
         assert(!viewModel.state.value.isLoading)
         assert(viewModel.state.value.categories[0].category == "Beef")
@@ -70,15 +68,14 @@ class CategoryListViewModelTest {
 
 
     @Test
-    fun `WHEN getCategory invoked THEN Error is RETURNED`() = runTest {
+    fun `WHEN getCategory invoked THEN Error is RETURNED`() {
         val expectedResult = Response.Error("Error")
         coEvery { repository.getCategories() } returns expectedResult
 
         val viewModel = CategoryListViewModel(getCategoriesUseCase, categoryUiMapper)
-        viewModel.getCategories()
 
-        backgroundScope.launch {
-            viewModel.state.collect {}
+        runTest {
+            viewModel.getCategories()
         }
         assert(!viewModel.state.value.isLoading)
         assert(viewModel.state.value.error == "Error")

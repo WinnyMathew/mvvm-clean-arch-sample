@@ -45,15 +45,18 @@ class MealDetailViewModelTest {
     }
 
     @Test
-    fun `WHEN getMeal invoked THEN Loading State is RETURNED`() = runTest {
+    fun `WHEN getMeal invoked THEN Loading State is RETURNED`() {
         val expectedResult = Response.Loading
         coEvery { repository.getMealById(MEAL_ID)} returns expectedResult
 
-        val viewModel = MealDetailViewModel(getMealUseCase, mealDetailUiMapper, savedStateHandle)
-        viewModel.getMeal(MEAL_ID)
+        val viewModel = MealDetailViewModel(
+            getMealUseCase = getMealUseCase,
+            mealDetailUiMapper = mealDetailUiMapper,
+            savedStateHandle = savedStateHandle
+        )
 
-        backgroundScope.launch {
-            viewModel.state.collect{}
+        runTest {
+            viewModel.getMeal(MEAL_ID)
         }
 
         assertTrue(viewModel.state.value.isLoading)
@@ -61,15 +64,18 @@ class MealDetailViewModelTest {
     }
 
     @Test
-    fun `WHEN getMeal invoked THEN MealDetail list is RETURNED`() = runTest {
+    fun `WHEN getMeal invoked THEN MealDetail list is RETURNED`() {
         val expectedResult = Response.Success(listOf(getMealDetail()))
         coEvery { repository.getMealById(MEAL_ID)} returns expectedResult
 
-        val viewModel = MealDetailViewModel(getMealUseCase, mealDetailUiMapper, savedStateHandle)
-        viewModel.getMeal(MEAL_ID)
+        val viewModel = MealDetailViewModel(
+            getMealUseCase = getMealUseCase,
+            mealDetailUiMapper = mealDetailUiMapper,
+            savedStateHandle = savedStateHandle
+        )
 
-        backgroundScope.launch {
-            viewModel.state.collect{}
+        runTest {
+            viewModel.getMeal(MEAL_ID)
         }
 
         assertFalse(viewModel.state.value.isLoading)
@@ -79,15 +85,18 @@ class MealDetailViewModelTest {
     }
 
     @Test
-    fun `WHEN getMeal invoked THEN Error is RETURNED`() = runTest {
+    fun `WHEN getMeal invoked THEN Error is RETURNED`() {
         val expectedResult = Response.Error("Error")
         coEvery { repository.getMealById(MEAL_ID) } returns expectedResult
 
-        val viewModel = MealDetailViewModel(getMealUseCase, mealDetailUiMapper, savedStateHandle)
-        viewModel.getMeal(MEAL_ID)
+        val viewModel = MealDetailViewModel(
+            getMealUseCase = getMealUseCase,
+            mealDetailUiMapper = mealDetailUiMapper,
+            savedStateHandle = savedStateHandle
+        )
 
-        backgroundScope.launch {
-            viewModel.state.collect{}
+        runTest {
+            viewModel.getMeal(MEAL_ID)
         }
 
         assertFalse(viewModel.state.value.isLoading)
