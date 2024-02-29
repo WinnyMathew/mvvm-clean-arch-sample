@@ -5,10 +5,7 @@ import com.meals.data.mapper.category.CategoryMapper
 import com.meals.data.mapper.mealDetails.MealDetailMapper
 import com.meals.data.mapper.meals.MealsMapper
 import com.meals.domain.Response
-import com.meals.domain.datasource.RemoteDataSource
-import com.meals.domain.entity.Category
-import com.meals.domain.entity.MealDetail
-import com.meals.domain.entity.Meals
+import com.meals.data.repository.datasource.RemoteDataSource
 import javax.inject.Inject
 
 class RemoteDataSourceImpl @Inject constructor(

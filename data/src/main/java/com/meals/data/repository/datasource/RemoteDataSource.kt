@@ -1,4 +1,4 @@
-package com.meals.domain.datasource
+package com.meals.data.repository.datasource
 
 import com.meals.domain.Response
 import com.meals.domain.entity.Category

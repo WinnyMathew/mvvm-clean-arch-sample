@@ -1,7 +1,7 @@
 package com.meals.data.di
 
 import com.meals.data.repository.MealRepositoryImpl
-import com.meals.domain.datasource.RemoteDataSource
+import com.meals.data.repository.datasource.RemoteDataSource
 import com.meals.data.repository.datasourceImpl.RemoteDataSourceImpl
 import com.meals.domain.repository.MealRepository
 import dagger.Binds

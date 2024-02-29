@@ -4,7 +4,7 @@ import com.meals.data.util.getCategory
 import com.meals.data.util.getMealDetail
 import com.meals.data.util.getMeals
 import com.meals.domain.Response
-import com.meals.domain.datasource.RemoteDataSource
+import com.meals.data.repository.datasource.RemoteDataSource
 import com.meals.domain.entity.Category
 import com.meals.domain.entity.MealDetail
 import com.meals.domain.entity.Meals

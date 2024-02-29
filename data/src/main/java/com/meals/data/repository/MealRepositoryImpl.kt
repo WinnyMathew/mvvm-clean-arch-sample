@@ -1,6 +1,6 @@
 package com.meals.data.repository
 
-import com.meals.domain.datasource.RemoteDataSource
+import com.meals.data.repository.datasource.RemoteDataSource
 import com.meals.domain.repository.MealRepository
 import javax.inject.Inject
 
