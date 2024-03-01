@@ -83,9 +83,9 @@ fun CategoriesScreen(
                 }
             }
         }
-        if (state.error.isNotBlank()) {
+        state.error?.let {
             Text(
-                text = state.error,
+                text = it,
                 color = MaterialTheme.colorScheme.error,
                 textAlign = TextAlign.Center,
                 modifier = Modifier
