@@ -4,12 +4,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.meals.domain.Response
 import com.meals.domain.usecase.GetCategoriesUseCase
+import com.meals.presentation.ui.SideEffect
+import com.meals.presentation.ui.categoryList.CategoryScreenIntent.CategoryItemClick
 import com.meals.presentation.ui.categoryList.CategoryScreenIntent.GetMealCategories
 import com.meals.presentation.ui.mapper.categoryUi.CategoryUiMapper
 import com.meals.presentation.utils.CoroutineContextProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -23,13 +28,25 @@ class CategoryListViewModel @Inject constructor(
     private val _state = MutableStateFlow(CategoryListState())
     val state: StateFlow<CategoryListState> = _state.asStateFlow()
 
+    private val _sideEffect =  MutableSharedFlow<SideEffect<String>>()
+    val sideEffect: SharedFlow<SideEffect<String>> = _sideEffect.asSharedFlow()
+
     init {
         handleIntent(GetMealCategories)
     }
 
-    private fun handleIntent(categoryScreenIntent: CategoryScreenIntent) {
+    internal fun handleIntent(categoryScreenIntent: CategoryScreenIntent) {
         when (categoryScreenIntent) {
-            is GetMealCategories -> getCategories()
+            GetMealCategories -> getCategories()
+            is CategoryItemClick -> {
+                viewModelScope.launch {
+                    _sideEffect.emit(
+                        SideEffect.OnItemClickNavigateToNextScreen(
+                            categoryScreenIntent.strCategory
+                        )
+                    )
+                }
+            }
         }
     }
 

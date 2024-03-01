@@ -25,11 +25,7 @@ fun NavGraphs() {
         composable(
             route = Screen.CategoriesScreen.route
         ) {
-            CategoriesScreen(
-                onCategoryClick = { strCategory ->
-                    navController.navigate("${Screen.MealsScreen.route}/${strCategory}")
-                }
-            )
+            CategoriesScreen(navController = navController)
         }
 
         // Meals Screen
@@ -38,12 +34,7 @@ fun NavGraphs() {
             arguments = listOf(navArgument(PARAM_STR_CATEGORY) { type = NavType.StringType })
         ) { navBackStackEntry ->
             navBackStackEntry.arguments?.getString(PARAM_STR_CATEGORY)?.let {
-                MealsScreen(
-                    navController = navController,
-                    onMealItemClick = { idMeal ->
-                        navController.navigate("${Screen.MealDetailScreen.route}/${idMeal}")
-                    }
-                )
+                MealsScreen(navController = navController)
             }
         }
 

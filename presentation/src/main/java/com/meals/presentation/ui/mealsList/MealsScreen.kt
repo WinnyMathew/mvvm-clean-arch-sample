@@ -17,6 +17,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -31,6 +32,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.meals.presentation.ui.HeadingTextComponent
 import com.meals.presentation.R
+import com.meals.presentation.ui.SideEffect
+import com.meals.presentation.navigation.Screen
 import com.meals.presentation.ui.mealsList.components.SingleMealItem
 import com.meals.presentation.ui.theme.AppDimens.UI_SIZE_10
 import com.meals.presentation.ui.theme.AppDimens.UI_SIZE_30
@@ -38,11 +41,20 @@ import com.meals.presentation.ui.theme.AppDimens.UI_SIZE_5
 
 @Composable
 fun MealsScreen(
-    onMealItemClick: (String) -> Unit,
     navController: NavController,
     viewModel: MealsListViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
+
+    LaunchedEffect(Unit) {
+        viewModel.sideEffect.collect {
+            when (it) {
+                is SideEffect.OnItemClickNavigateToNextScreen -> {
+                    navController.navigate("${Screen.MealDetailScreen.route}/${it.value}")
+                }
+            }
+        }
+    }
 
     Box(Modifier.fillMaxSize()){
         Column(Modifier.fillMaxWidth()) {
@@ -81,7 +93,11 @@ fun MealsScreen(
                 items(state.meals) { dishes ->
                     SingleMealItem(
                         mealsItem = dishes,
-                        onMealItemClick = onMealItemClick
+                        onMealItemClick = { idMeal ->
+                            viewModel.handleIntent(
+                                MealListScreenIntent.MealsListItemClick(idMeal)
+                            )
+                        }
                     )
                 }
             }

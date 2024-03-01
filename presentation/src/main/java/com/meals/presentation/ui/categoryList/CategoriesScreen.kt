@@ -13,6 +13,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -22,18 +23,31 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.meals.presentation.ui.HeadingTextComponent
 import com.meals.presentation.R
+import com.meals.presentation.ui.SideEffect
+import com.meals.presentation.navigation.Screen
 import com.meals.presentation.ui.categoryList.components.SingleCategoryItem
 import com.meals.presentation.ui.theme.AppDimens.UI_SIZE_10
 import com.meals.presentation.ui.theme.AppDimens.UI_SIZE_15
 
 @Composable
 fun CategoriesScreen(
-    onCategoryClick: (String) -> Unit,
+    navController: NavController,
     viewModel: CategoryListViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
+
+    LaunchedEffect(Unit) {
+            viewModel.sideEffect.collect {
+                when (it) {
+                    is SideEffect.OnItemClickNavigateToNextScreen -> {
+                        navController.navigate("${Screen.MealsScreen.route}/${it.value}")
+                    }
+                }
+            }
+    }
 
     Box(Modifier.fillMaxSize()) {
         Column(Modifier.fillMaxWidth()) {
@@ -60,7 +74,11 @@ fun CategoriesScreen(
                 items(state.categories) { category ->
                     SingleCategoryItem(
                         categoryItem = category,
-                        onCategoryItemClick = onCategoryClick
+                        onCategoryItemClick = { strCategory ->
+                            viewModel.handleIntent(
+                                CategoryScreenIntent.CategoryItemClick(strCategory)
+                            )
+                        }
                     )
                 }
             }
