@@ -6,18 +6,16 @@ import com.meals.domain.entity.MealDetail
 import javax.inject.Inject
 
 class MealDetailMapper @Inject constructor() : ListMapper<MealDetailDto, MealDetail> {
-
-    override fun map(data: List<MealDetailDto>) = data.map {
-        it
-    }.map { mealDetail ->
-        MealDetail(
-            idMeal = mealDetail.idMeal,
-            strMeal = mealDetail.strMeal,
-            strCategory = mealDetail.strCategory,
-            strArea = mealDetail.strArea,
-            strInstructions = mealDetail.strInstructions,
-            strMealThumb = mealDetail.strMealThumb
-        )
-
+    override fun map(data: List<MealDetailDto>) = data.map { mealDetail ->
+        with(mealDetail) {
+            MealDetail(
+                idMeal = idMeal,
+                strMeal = strMeal,
+                strCategory = strCategory,
+                strArea = strArea,
+                strInstructions = strInstructions,
+                strMealThumb = strMealThumb
+            )
+        }
     }
 }
