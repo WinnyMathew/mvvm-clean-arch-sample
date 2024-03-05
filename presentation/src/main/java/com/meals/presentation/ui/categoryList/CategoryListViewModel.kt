@@ -10,6 +10,7 @@ import com.meals.presentation.ui.categoryList.CategoryScreenIntent.GetMealCatego
 import com.meals.presentation.ui.mapper.categoryUi.CategoryUiMapper
 import com.meals.presentation.utils.CoroutineContextProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -28,7 +29,7 @@ class CategoryListViewModel @Inject constructor(
     private val _state = MutableStateFlow(CategoryListState(isLoading = true))
     val state: StateFlow<CategoryListState> = _state.asStateFlow()
 
-    private val _sideEffect = MutableSharedFlow<SideEffect<String>>()
+    private val _sideEffect = MutableSharedFlow<SideEffect<String>>(extraBufferCapacity = 1)
     val sideEffect: SharedFlow<SideEffect<String>> = _sideEffect.asSharedFlow()
 
     init {
@@ -39,13 +40,11 @@ class CategoryListViewModel @Inject constructor(
         when (categoryScreenIntent) {
             GetMealCategories -> getCategories()
             is CategoryItemClick -> {
-                viewModelScope.launch {
-                    _sideEffect.emit(
-                        SideEffect.OnItemClickNavigateToNextScreen(
-                            categoryScreenIntent.strCategory
-                        )
+                _sideEffect.tryEmit(
+                    SideEffect.OnItemClickNavigateToNextScreen(
+                        categoryScreenIntent.strCategory
                     )
-                }
+                )
             }
         }
     }

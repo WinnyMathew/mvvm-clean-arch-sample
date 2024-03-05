@@ -34,7 +34,7 @@ class MealDetailViewModel @Inject constructor(
 
     private fun handleIntent(mealDetailIntent: MealDetailScreenIntent, idMeal: String) {
         when (mealDetailIntent) {
-            is GetMealDetail -> getMeal(idMeal)
+            GetMealDetail -> getMeal(idMeal)
         }
     }
 

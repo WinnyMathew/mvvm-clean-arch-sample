@@ -31,7 +31,7 @@ class MealsListViewModel @Inject constructor(
     private val _state = MutableStateFlow(MealsListState(isLoading = true))
     val state: StateFlow<MealsListState> = _state.asStateFlow()
 
-    private val _sideEffect = MutableSharedFlow<SideEffect<String>>()
+    private val _sideEffect = MutableSharedFlow<SideEffect<String>>(extraBufferCapacity = 1)
     val sideEffect: SharedFlow<SideEffect<String>> = _sideEffect.asSharedFlow()
 
     init {
@@ -52,13 +52,11 @@ class MealsListViewModel @Inject constructor(
             }
 
             is MealsListItemClick -> {
-                viewModelScope.launch {
-                    _sideEffect.emit(
-                        SideEffect.OnItemClickNavigateToNextScreen(
-                            mealListScreenIntent.idMeal
-                        )
+                _sideEffect.tryEmit(
+                    SideEffect.OnItemClickNavigateToNextScreen(
+                        mealListScreenIntent.idMeal
                     )
-                }
+                )
             }
         }
     }
