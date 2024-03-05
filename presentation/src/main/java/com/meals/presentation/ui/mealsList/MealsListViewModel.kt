@@ -28,24 +28,29 @@ class MealsListViewModel @Inject constructor(
     private val coroutineContextProvider: CoroutineContextProvider = CoroutineContextProvider(),
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
-    private val _state = MutableStateFlow(MealsListState())
+    private val _state = MutableStateFlow(MealsListState(isLoading = true))
     val state: StateFlow<MealsListState> = _state.asStateFlow()
 
-    private val _sideEffect =  MutableSharedFlow<SideEffect<String>>()
+    private val _sideEffect = MutableSharedFlow<SideEffect<String>>()
     val sideEffect: SharedFlow<SideEffect<String>> = _sideEffect.asSharedFlow()
+
     init {
         savedStateHandle.get<String>(PARAM_STR_CATEGORY)?.let { strCategory ->
             handleIntent(GetMealsList, strCategory)
         }
     }
 
-    internal fun handleIntent(mealListScreenIntent: MealListScreenIntent, strCategory: String? = null) {
+    internal fun handleIntent(
+        mealListScreenIntent: MealListScreenIntent,
+        strCategory: String? = null
+    ) {
         when (mealListScreenIntent) {
             GetMealsList -> {
                 strCategory?.let {
                     getMeals(strCategory)
                 }
             }
+
             is MealsListItemClick -> {
                 viewModelScope.launch {
                     _sideEffect.emit(
@@ -60,22 +65,23 @@ class MealsListViewModel @Inject constructor(
 
     internal fun getMeals(strCategory: String) {
         viewModelScope.launch(coroutineContextProvider.IO) {
-            _state.value = MealsListState(isLoading = true)
-            when (val result = getMealsUseCase(strCategory)) {
-                is Response.Success -> {
-                    _state.value = MealsListState(
-                        meals = mealsUiMapper.map(result.data)
-                    )
-                }
+            getMealsUseCase(strCategory).also { result ->
+                when (result) {
+                    is Response.Success -> {
+                        _state.value = MealsListState(
+                            meals = mealsUiMapper.map(result.data)
+                        )
+                    }
 
-                is Response.Error -> {
-                    _state.value = MealsListState(
-                        error = result.message
-                    )
-                }
+                    is Response.Error -> {
+                        _state.value = MealsListState(
+                            error = result.message
+                        )
+                    }
 
-                is Response.Loading -> {
-                    _state.value = MealsListState(isLoading = true)
+                    is Response.Loading -> {
+                        _state.value = MealsListState(isLoading = true)
+                    }
                 }
             }
         }

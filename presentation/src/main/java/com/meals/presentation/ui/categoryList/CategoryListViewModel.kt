@@ -24,11 +24,11 @@ class CategoryListViewModel @Inject constructor(
     private val getCategoriesUseCase: GetCategoriesUseCase,
     private val categoryUiMapper: CategoryUiMapper,
     private val coroutineContextProvider: CoroutineContextProvider = CoroutineContextProvider()
-): ViewModel() {
-    private val _state = MutableStateFlow(CategoryListState())
+) : ViewModel() {
+    private val _state = MutableStateFlow(CategoryListState(isLoading = true))
     val state: StateFlow<CategoryListState> = _state.asStateFlow()
 
-    private val _sideEffect =  MutableSharedFlow<SideEffect<String>>()
+    private val _sideEffect = MutableSharedFlow<SideEffect<String>>()
     val sideEffect: SharedFlow<SideEffect<String>> = _sideEffect.asSharedFlow()
 
     init {
@@ -52,23 +52,25 @@ class CategoryListViewModel @Inject constructor(
 
     internal fun getCategories() {
         viewModelScope.launch(coroutineContextProvider.IO) {
-            _state.value = CategoryListState(isLoading = true)
-            when (val result = getCategoriesUseCase.invoke()) {
-                is Response.Success -> {
-                    _state.value = CategoryListState(
-                        categories = categoryUiMapper.map(result.data)
-                    )
-                }
-                is Response.Error -> {
-                    _state.value = CategoryListState(
-                        error = result.message
-                    )
-                }
-                is Response.Loading -> {
-                    _state.value = CategoryListState(isLoading = true)
+            getCategoriesUseCase().also { result ->
+                when (result) {
+                    is Response.Success -> {
+                        _state.value = CategoryListState(
+                            categories = categoryUiMapper.map(result.data)
+                        )
+                    }
+
+                    is Response.Error -> {
+                        _state.value = CategoryListState(
+                            error = result.message
+                        )
+                    }
+
+                    is Response.Loading -> {
+                        _state.value = CategoryListState(isLoading = true)
+                    }
                 }
             }
         }
     }
-
 }

@@ -23,8 +23,9 @@ class MealDetailViewModel @Inject constructor(
     private val coroutineContextProvider: CoroutineContextProvider = CoroutineContextProvider(),
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
-    private val _state = MutableStateFlow(MealDetailState())
+    private val _state = MutableStateFlow(MealDetailState(isLoading = true))
     val state: StateFlow<MealDetailState> = _state.asStateFlow()
+
     init {
         savedStateHandle.get<String>(PARAM_ID_MEAL)?.let { idMeal ->
             handleIntent(GetMealDetail, idMeal)
@@ -39,22 +40,23 @@ class MealDetailViewModel @Inject constructor(
 
     internal fun getMeal(idMeal: String) {
         viewModelScope.launch(coroutineContextProvider.IO) {
-            _state.value = MealDetailState(isLoading = true)
-            when (val result = getMealUseCase(idMeal)) {
-                is Response.Success -> {
-                    _state.value = MealDetailState(
-                        meals = mealDetailUiMapper.map(result.data ?: emptyList())
-                    )
-                }
+            getMealUseCase(idMeal).also { result ->
+                when (result) {
+                    is Response.Success -> {
+                        _state.value = MealDetailState(
+                            meals = mealDetailUiMapper.map(result.data)
+                        )
+                    }
 
-                is Response.Error -> {
-                    _state.value = MealDetailState(
-                        error = result.message
-                    )
-                }
+                    is Response.Error -> {
+                        _state.value = MealDetailState(
+                            error = result.message
+                        )
+                    }
 
-                is Response.Loading -> {
-                    _state.value = MealDetailState(isLoading = true)
+                    is Response.Loading -> {
+                        _state.value = MealDetailState(isLoading = true)
+                    }
                 }
             }
         }
